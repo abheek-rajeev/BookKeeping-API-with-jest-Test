@@ -13,3 +13,6 @@ const app= express();
 app.listen(3000,() =>{
     console.log("server running at 300");
 })
+app.get('/',(req,res)=>{
+    
+})
