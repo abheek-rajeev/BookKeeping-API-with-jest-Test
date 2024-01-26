@@ -1,6 +1,11 @@
 import mongoose from "mongoose";
 
 const bookSchema= new mongoose.Schema({
+    isbn:{
+        type:String,
+        required:true,
+        unique:true
+    },
     title:{
         type:String,
         required:true
@@ -8,11 +13,6 @@ const bookSchema= new mongoose.Schema({
     author:{
         type:String,
         required:true
-    },
-    isbn:{
-        type:String,
-        required:true,
-        unique:true
     },
     price:{
         type:Number,

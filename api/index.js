@@ -2,6 +2,8 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import authRouter from "./routes/auth.route.js"
+import bookRouter from "./routes/book.route.js"
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 
@@ -19,7 +21,11 @@ app.get('/',(req,res)=>{
 })
 
 app.use(express.json());
+app.use(cookieParser());
+
 app.use("/api/auth",authRouter);
+app.use("/api/book",bookRouter);
+
 
 // middleware
 
