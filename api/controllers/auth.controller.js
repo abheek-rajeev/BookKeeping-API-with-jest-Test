@@ -30,10 +30,10 @@ exports.signin = async (req, res, next) => {
         const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
         const { password: pass, ...rest } = validUser._doc;
         // ,expires:new Date(Date.now()+24*60*60)
-        res
+        return res
             .cookie("access_Token", token, { httpOnly: true })
             .status(200)
-            .json(rest);
+            .json({ message: "SignIn succesfully",rest});
     } catch (error) {
         next(error);
     }

@@ -9,6 +9,7 @@ exports.createbook = async (req, res, next) => {
         console.log("book created successfully");
         res.status(201).json("Book created successfully");
     } catch (err) {
+        console.log(err);
         next(err);
     }
 };
@@ -26,12 +27,14 @@ exports.all = async (req, res, next) => {
 };
 
 exports.one = async (req, res, next) => {
+    // console.log(req.body);
     const { isbn } = req.body;
     try {
         const validBook = await Book.findOne({ isbn });
         if (!validBook) {
             return next(errorHandler(404, "Invalid ISBN||Book not Found"));
         } else {
+            // console.log(validBook)
             res.json(validBook);
         }
     } catch (err) {
