@@ -1,13 +1,17 @@
 import express from "express"
-import { verifyToken } from "../utils/verifyUser.js";
-import { all, createbook, one } from "../controllers/book.controller.js";
+import { verifyAdmin, verifyToken } from "../utils/verifyUser.js";
+import { all, createbook, deleteBook, one, updateBook } from "../controllers/book.controller.js";
 
 const router= express.Router();
 
-router.post("/createBook",verifyToken,createbook);
+router.post("/createBook",verifyAdmin,createbook);
 
 router.get("/all",verifyToken,all);
 
 router.get("/one",verifyToken,one);
+
+router.put("/updateBook/:isbn",verifyAdmin,updateBook);
+
+router.delete("/deleteBook",verifyAdmin,deleteBook);
 
 export default router

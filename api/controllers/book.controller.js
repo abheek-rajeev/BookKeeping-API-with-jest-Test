@@ -40,3 +40,30 @@ export const one = async(req,res,next)=>{
     }
 }
 
+export const updateBook = async(req,res,next)=>{
+    try{
+        const {title,author,price,quantity}=req.body;
+        const updatedBook = await Book.findOneAndUpdate({isbn:req.params.isbn},{title,author,price,quantity},{ new: true });
+        if (!updatedBook){
+            return next(errorHandler(404,"invalid ISBN||Book not Found"));
+        }
+        else{
+            res.status(201).json({ message: "Book Updated successfully", updatedBook });
+        }
+    }catch(err){
+        next(err)
+    }
+
+}
+
+export const deleteBook = async (req,res,next)=>{
+    const {isbn}=req.body;
+    const deletedBook = await Book.findOneAndDelete({isbn});
+    if (!deletedBook){
+        return next(errorHandler(404,"invalid ISBN||Book not Found"));
+    }else{
+        res.status(201).json({ message: "Book Deleted successfully", deletedBook });
+    }
+}
+
+
